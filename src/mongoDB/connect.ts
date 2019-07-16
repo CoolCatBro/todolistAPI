@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 export default (dbHost: string) => {
     mongoose.connect(
         dbHost,
-        {useNewUrlParser : true},
+        {useNewUrlParser : true,
+        useFindAndModify: false},
         )
         .then(() => {
             console.log(`Successfully connected to ${dbHost}`);

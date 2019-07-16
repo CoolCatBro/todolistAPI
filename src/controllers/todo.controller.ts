@@ -1,10 +1,6 @@
 import Todo, { ICreateTodo, ITodo } from '../models/todo.model';
 
 
-interface ITodoSwitch {
-    completed: ICreateTodo['completed'];
-}
-
 async function CreateTodo(newTodo: ICreateTodo): Promise<ITodo> {
     return Todo.create(newTodo)
         .then((data: ITodo) => {
@@ -25,8 +21,10 @@ async function ReadTodos(readTodo: ICreateTodo | any): Promise<ITodo[]> {
         });
 }
 
-async function SwitchTodo(id: string, todoSwitch: ITodoSwitch): Promise<ITodo> {
-    return Todo.findByIdAndUpdate(id, todoSwitch)
+async function SwitchTodo(id: string, state: boolean): Promise<ITodo> {
+    return Todo.findByIdAndUpdate(id, {
+            completed: state,
+            })
            .then((data: ITodo) => {
                return data;
            })
