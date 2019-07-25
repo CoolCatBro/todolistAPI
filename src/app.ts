@@ -1,4 +1,5 @@
 import express, { Application, Router } from 'express';
+import enableCORS from './enableCORS';
 import connect from './mongoDB/connect';
 import errorHandler from './routes/errorHandler';
 
@@ -21,7 +22,7 @@ class App {
     }
 
     public start(port: string | number) {
-
+        enableCORS(this.express);
         this.express.use('/api', this.router);
         errorHandler(this.express);
 
