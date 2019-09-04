@@ -2,6 +2,7 @@ import express, { Application, Router } from 'express';
 import enableCORS from './enableCORS';
 import connect from './mongoDB/connect';
 import errorHandler from './routes/errorHandler';
+import params from './routes/params';
 
 class App {
 
@@ -11,6 +12,7 @@ class App {
     constructor() {
         this.express = express();
         this.router = express.Router();
+        this.mountRoutes(params);
     }
 
     public connectDB(dbHost: string): void {
@@ -21,7 +23,7 @@ class App {
         routes(this.router);
     }
 
-    public start(port: string | number) {
+    public start(port: string | number| null) {
         enableCORS(this.express);
         this.express.use('/api', this.router);
         errorHandler(this.express);
