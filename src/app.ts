@@ -15,8 +15,8 @@ class App {
         this.mountRoutes(params);
     }
 
-    public connectDB(dbHost: string): void {
-        connect(dbHost);
+    public connectDB(dbHost: string, dbUser: string, dbPass: string): void {
+        connect(dbHost, dbUser, dbPass);
     }
 
     public mountRoutes(routes: (router: Router) => void): void {
@@ -25,7 +25,7 @@ class App {
 
     public start(port: string | number| null) {
         enableCORS(this.express);
-        this.express.use('/api', this.router);
+        this.express.use('/', this.router);
         errorHandler(this.express);
 
         port = process.env.PORT || port;
